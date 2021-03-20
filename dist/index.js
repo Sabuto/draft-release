@@ -46,17 +46,20 @@ async function run() {
 
     let [major, minor, patch] = lastRelease.split('.');
 
+    patch++;
+
     if (Object.keys(draft).length !== 0) {
       // core.info(JSON.stringify(draft));
     } else {
       core.info("No Draft found.... Creating new draft.");
       core.info(`latest tag: ${lastRelease}`);
-      core.info(`Creating draft release with the tag ${major}.${minor}.${patch++}`);
+      core.info(`Creating draft release with the tag ${major}.${minor}.${patch}`);
       await octokit.repos.createRelease({
         owner: owner,
         repo: repo,
-        tag_name: `${prefix}${major}.${minor}.${patch++}`,
-        name: `Auto-Drafter: ${prefix}${major}.${minor}.${patch++}`
+        tag_name: `${prefix}${major}.${minor}.${patch}`,
+        name: `Auto-Drafter: ${prefix}${major}.${minor}.${patch}`,
+        draft: true
       });
       core.info("Successfully created the draft.");
     }
