@@ -28,6 +28,8 @@ async function run() {
 
     if (draft != undefined) {
       core.info(JSON.stringify(draft));
+    } else {
+      core.info("No Draft found.... implement creating.");
     }
 
     // Get the prefix from the inputs
