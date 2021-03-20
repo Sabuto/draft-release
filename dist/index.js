@@ -6,19 +6,18 @@ require('./sourcemap-register.js');module.exports =
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __nccwpck_require__) => {
 
 const core = __nccwpck_require__(186);
-const { Github, context } = __nccwpck_require__(438);
+const { GitHub, context } = __nccwpck_require__(438);
 //const release = require('lib/release');
 
 
 // most @actions toolkit packages have async methods
 async function run() {
   try {
-    core.info("Test 123");
     // set the success output to false to begin with
     core.setOutput('success', false);
 
     // create a new instance so we can interact with the github api
-    const github = new Github(process.env.GITHUB_TOKEN);
+    const github = new GitHub(process.env.GITHUB_TOKEN);
 
     // Get the owner and context from the payload that triggered the action
     const {owner: currentOwner, repo: context} = context.repo;
