@@ -60,6 +60,9 @@ async function run() {
         release_id: draft[Object.keys(draft)[0]].id
       });
       let body = draftObj.body;
+      if(body === undefined){
+        body = "";
+      }
       commits.forEach(obj => {
         body += `* ${obj.message} @${obj.committer.username}`
       })
