@@ -59,10 +59,10 @@ async function run() {
         repo: repo,
         release_id: draft[Object.keys(draft)[0]].id
       });
-      core.info(JSON.stringify(draftObj, null, 3));
-      // commits.forEach(obj => {
-      //   core.info(JSON.stringify(obj, null, 3));
-      // })
+      let body = draftObj.body;
+      commits.forEach(obj => {
+        core.info(JSON.stringify(obj, null, 3));
+      })
     } else {
       core.info("No Draft found.... Creating new draft.");
       core.info(`latest tag: ${lastReleaseTag}`);
