@@ -24,7 +24,7 @@ async function run() {
     });
 
     let draft = releases.filter(obj => {
-      if(obj.draft == true && obj.name.startsWith("RL Drafter:")){
+      if(obj.draft == true && obj.name.startsWith("Auto-Drafter:")){
         return true;
       }
     });
@@ -39,20 +39,19 @@ async function run() {
 
     let [major, minor, patch] = lastRelease.split('.');
 
-    core.info(major);
-    core.info(minor + 1);
-    core.info(patch++);
-
     if (Object.keys(draft).length !== 0) {
       // core.info(JSON.stringify(draft));
     } else {
-      // core.info("No Draft found.... Creating new draft.");
-      // core.info(`latest tag: ${tag}`);
-      // await octokit.repos.createRelease({
-      //   owner: owner,
-      //   repo: repo,
-      //   tag_name: `${prefix}`
-      // })
+      core.info("No Draft found.... Creating new draft.");
+      core.info(`latest tag: ${lastRelease}`);
+      core.info(`Creating draft release with the tag ${major}.${minor}.${patch++}`);
+      await octokit.repos.createRelease({
+        owner: owner,
+        repo: repo,
+        tag_name: `${prefix}${major}.${minor}.${patch++}`,
+        name: `Auto-Drafter: ${prefix}${major}.${minor}.${patch++}`
+      });
+      core.info("Successfully created the draft.");
     }
 
     // Get the prefix from the inputs
