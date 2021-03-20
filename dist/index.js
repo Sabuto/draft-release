@@ -13,7 +13,7 @@ const github = __nccwpck_require__(438);
 // most @actions toolkit packages have async methods
 async function run() {
   try {
-    const payload = github.context.payload;
+    const commits = github.context.payload.commits;
     // set the success output to false to begin with
     core.setOutput('success', false);
     const prefix = core.getInput('prefix');
@@ -51,7 +51,7 @@ async function run() {
 
     if (Object.keys(draft).length !== 0) {
       core.info("Draft found! lets add to the content");
-      core.info(JSON.stringify(github.context, null, 3));
+      core.info(JSON.stringify(commits, null, 3));
     } else {
       core.info("No Draft found.... Creating new draft.");
       core.info(`latest tag: ${lastRelease}`);
