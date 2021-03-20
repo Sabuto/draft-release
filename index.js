@@ -37,17 +37,17 @@ async function run() {
 
     lastRelease = lastRelease.substring(1);
 
-    let {major, minor, patch} = lastRelease.split();
+    let {major, minor, patch} = lastRelease.split('.');
 
     core.info(major);
     core.info(minor);
     core.info(patch);
 
     if (Object.keys(draft).length !== 0) {
-      core.info(JSON.stringify(draft));
+      // core.info(JSON.stringify(draft));
     } else {
-      core.info("No Draft found.... Creating new draft.");
-      core.info(`latest tag: ${tag}`);
+      // core.info("No Draft found.... Creating new draft.");
+      // core.info(`latest tag: ${tag}`);
       // await octokit.repos.createRelease({
       //   owner: owner,
       //   repo: repo,
