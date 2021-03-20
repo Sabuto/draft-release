@@ -37,7 +37,7 @@ async function run() {
 
     lastRelease = lastRelease.substring(1);
 
-    let {major, minor, patch} = lastRelease.split('.');
+    let [major, minor, patch] = lastRelease.split('.');
 
     core.info(major);
     core.info(minor);
