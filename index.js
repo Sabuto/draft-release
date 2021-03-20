@@ -12,9 +12,14 @@ async function run() {
     // create a new instance so we can interact with the github api
     const octokit = github.getOctokit(core.getInput('token'));
 
+    const splitRepo = core.getInput('repo').split('/');
+
+    const owner = splitRepo[0];
+    const repo = splitRepo[1];
+
     const {data: issues} = await octokit.issues.listForRepo({
-      owner: 'sabuto',
-      repo: core.getInput('repo')
+      owner: owner,
+      repo: repo
     });
 
     // Get the prefix from the inputs
