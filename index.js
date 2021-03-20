@@ -6,6 +6,7 @@ const github = require('@actions/github');
 // most @actions toolkit packages have async methods
 async function run() {
   try {
+    const payload = github.context.payload;
     // set the success output to false to begin with
     core.setOutput('success', false);
     const prefix = core.getInput('prefix');
@@ -42,7 +43,7 @@ async function run() {
     patch++;
 
     if (Object.keys(draft).length !== 0) {
-      // core.info(JSON.stringify(draft));
+      core.info("Draft found! lets add to the content");
     } else {
       core.info("No Draft found.... Creating new draft.");
       core.info(`latest tag: ${lastRelease}`);
@@ -52,6 +53,7 @@ async function run() {
         repo: repo,
         tag_name: `${prefix}${major}.${minor}.${patch}`,
         name: `Auto-Drafter: ${prefix}${major}.${minor}.${patch}`,
+        body: payload,
         draft: true
       });
       core.info("Successfully created the draft.");
