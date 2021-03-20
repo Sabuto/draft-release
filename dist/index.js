@@ -40,10 +40,17 @@ async function run() {
       return obj.draft == false;
     });
 
-    core.info(JSON.stringify(withTags));
+    let lastRelease = withTags[Object.keys(withTags)[0]].tag_name;
+
+    lastRelease = lastRelease.substring(1);
+
+    let {major, minor, patch} = lastRelease.split();
+
+    core.info(major);
+    core.info(minor);
+    core.info(patch);
 
     if (Object.keys(draft).length !== 0) {
-      core.info(JSON.stringify(withTags[Object.keys(withTags)[0]].tag_name));
       core.info(JSON.stringify(draft));
     } else {
       core.info("No Draft found.... Creating new draft.");
