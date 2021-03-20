@@ -51,6 +51,7 @@ async function run() {
 
     if (Object.keys(draft).length !== 0) {
       core.info("Draft found! lets add to the content");
+      core.info(JSON.stringify(github.context, null, 3));
     } else {
       core.info("No Draft found.... Creating new draft.");
       core.info(`latest tag: ${lastRelease}`);
