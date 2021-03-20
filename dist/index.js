@@ -33,7 +33,7 @@ async function run() {
       return obj.draft === true;
     });
 
-    if (draft != undefined) {
+    if (Object.keys(draft).length !== 0) {
       core.info(JSON.stringify(draft));
     } else {
       core.info("No Draft found.... implement creating.");
