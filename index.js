@@ -17,7 +17,7 @@ async function run() {
     const owner = splitRepo[0];
     const repo = splitRepo[1];
 
-    const {data: issues} = await octokit.issues.listForRepo({
+    const {data: issues} = await octokit.repos.listReleases({
       owner: owner,
       repo: repo
     });
