@@ -41,15 +41,21 @@ async function run() {
       return obj.draft == false;
     });
 
-    let lastRelease = withTags[Object.keys(withTags)[0]].tag_name;
+    const lastRelease = withTags[Object.keys(withTags)[0]];
 
-    lastRelease = lastRelease.substring(1);
+    core.info(lastRelease);
 
-    let [major, minor, patch] = lastRelease.split('.');
+    let lastReleaseTag = lastRelease.tag_name;
+
+    lastReleaseTag = lastReleaseTag.substring(1);
+
+    let [major, minor, patch] = lastReleaseTag.split('.');
 
     patch++;
 
     if (Object.keys(draft).length !== 0) {
+
+      
       core.info("Draft found! lets add to the content");
       commits.forEach(obj => {
         core.info(obj.id);
@@ -57,7 +63,7 @@ async function run() {
       })
     } else {
       core.info("No Draft found.... Creating new draft.");
-      core.info(`latest tag: ${lastRelease}`);
+      core.info(`latest tag: ${lastReleaseTag}`);
       core.info(`Creating draft release with the tag ${major}.${minor}.${patch}`);
       await octokit.repos.createRelease({
         owner: owner,
