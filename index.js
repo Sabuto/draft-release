@@ -40,8 +40,8 @@ async function run() {
     let [major, minor, patch] = lastRelease.split('.');
 
     core.info(major);
-    core.info(minor);
-    core.info(patch);
+    core.info(minor + 1);
+    core.info(patch++);
 
     if (Object.keys(draft).length !== 0) {
       // core.info(JSON.stringify(draft));
