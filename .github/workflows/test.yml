@@ -23,4 +23,4 @@ jobs:
     - uses: ./
       with:
         prefix: 'v'
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.TOKEN }}
