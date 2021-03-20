@@ -10,7 +10,7 @@ async function run() {
     core.setOutput('success', false);
 
     // create a new instance so we can interact with the github api
-    const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
+    const octokit = github.getOctokit(core.getInput('token'));
 
     const context = octokit.context;
 

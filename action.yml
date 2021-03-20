@@ -5,6 +5,9 @@ inputs:
     description: 'prefix to apply to releases, default is "v"'
     required: true
     default: 'v'
+  token:
+    description: 'Personal Access token for github auth'
+    required: true
 outputs:
   success: # output will be available to future steps
     description: 'boolean as to weather draft was successfull or not'
