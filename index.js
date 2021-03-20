@@ -33,9 +33,12 @@ async function run() {
       return obj.draft == false;
     });
 
+    const latest = withTags[Object.keys(withTags)[Object.keys(withTags).length - 1]];
+
     core.info(JSON.stringify(withTags));
 
     if (Object.keys(draft).length !== 0) {
+      core.info(JSON.stringify(latest));
       core.info(Object.keys(draft).length);
       core.info(JSON.stringify(draft));
     } else {
