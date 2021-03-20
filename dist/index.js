@@ -61,6 +61,7 @@ async function run() {
       });
       let body = draftObj.body;
       commits.forEach(obj => {
+        core.info(JSON.stringify(obj, null, 3));
         body += `* ${obj.message} @${obj.comitter.username}`
       })
       core.info(body);
