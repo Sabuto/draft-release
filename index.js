@@ -23,7 +23,9 @@ async function run() {
     });
 
     let draft = issues.filter(obj => {
-      return obj.draft === true;
+      if(obj.draft == true && obj.name.startsWith("RL Drafter:")){
+        return true;
+      }
     });
 
     if (Object.keys(draft).length !== 0) {
