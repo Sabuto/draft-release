@@ -29,9 +29,16 @@ async function run() {
       repo: repo
     });
 
+    let draft = issues.filter(obj => {
+      return obj.draft === true;
+    });
+
+    if (draft != undefined) {
+      core.info(JSON.stringify(draft));
+    }
+
     // Get the prefix from the inputs
     //const prefix = core.getInput('prefix', {required: true});
-    core.info(JSON.stringify(issues));
   } catch (error) {
     core.setFailed(error.message);
   }
