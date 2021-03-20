@@ -33,12 +33,10 @@ async function run() {
       return obj.draft == false;
     });
 
-    const latest = withTags[Object.keys(withTags)[0]];
-
     core.info(JSON.stringify(withTags));
 
     if (Object.keys(draft).length !== 0) {
-      core.info(JSON.stringify(latest));
+      core.info(JSON.stringify(withTags[Object.keys(withTags)[0]]));
       core.info(JSON.stringify(draft));
     } else {
       core.info("No Draft found.... Creating new draft.");
