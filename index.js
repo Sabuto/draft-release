@@ -53,7 +53,7 @@ async function run() {
         repo: repo,
         tag_name: `${prefix}${major}.${minor}.${patch}`,
         name: `Auto-Drafter: ${prefix}${major}.${minor}.${patch}`,
-        body: payload,
+        body: payload.message,
         draft: true
       });
       core.info("Successfully created the draft.");
