@@ -46,12 +46,13 @@ async function run() {
 
     if (Object.keys(draft).length !== 0) {
       core.info("Draft found! lets add to the content");
-      const draftObj = await octokit.repos.getRelease({
-        owner: owner,
-        repo: repo,
-        release_id: draft.id
-      });
-      core.info(JSON.stringify(draftObj, null, 3));
+      core.info(JSON.stringify(draft, null, 3));
+      // const draftObj = await octokit.repos.getRelease({
+      //   owner: owner,
+      //   repo: repo,
+      //   release_id: draft.id
+      // });
+      // core.info(JSON.stringify(draftObj, null, 3));
       commits.forEach(obj => {
         core.info(obj.id);
         core.info(JSON.stringify(obj, null, 3));
