@@ -55,7 +55,7 @@ async function run() {
       core.info("No Draft found.... Creating new draft.");
       core.info(`latest tag: ${lastRelease}`);
       core.info(`Creating draft release with the tag ${major}.${minor}.${patch}`);
-      core.info(payload.message);
+      core.info(JSON.stringify(payload));
       await octokit.repos.createRelease({
         owner: owner,
         repo: repo,
