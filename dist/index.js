@@ -43,8 +43,6 @@ async function run() {
 
     const lastRelease = withTags[Object.keys(withTags)[0]];
 
-    core.info(JSON.stringify(lastRelease, null, 3));
-
     let lastReleaseTag = lastRelease.tag_name;
 
     lastReleaseTag = lastReleaseTag.substring(1);
@@ -54,9 +52,13 @@ async function run() {
     patch++;
 
     if (Object.keys(draft).length !== 0) {
-
-      
       core.info("Draft found! lets add to the content");
+      const draftObj = await octokit.repos.getRelease({
+        owner: owner,
+        repo: repo,
+        release_id: draft.id
+      });
+      core.info(JSON.stringify(draftObj, null, 3));
       commits.forEach(obj => {
         core.info(obj.id);
         core.info(JSON.stringify(obj, null, 3));
