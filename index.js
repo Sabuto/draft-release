@@ -16,7 +16,7 @@ async function run() {
 
     // Get the prefix from the inputs
     //const prefix = core.getInput('prefix', {required: true});
-    core.info(octokit);
+    core.info(JSON.stringify(octokit));
   } catch (error) {
     core.setFailed(error.message);
   }
