@@ -14,7 +14,7 @@ async function run() {
 
     const {data: issues} = await octokit.issues.listForRepo({
       owner: 'sabuto',
-      repo: 'draft-release'
+      repo: core.getInput('repo')
     });
 
     // Get the prefix from the inputs

@@ -1,6 +1,10 @@
 name: 'Draft'
 description: 'Draft a release from pull requests'
 inputs:
+  repo:
+    descrition: 'Repository to checkout, defaults to runner'
+    required: true
+    default: ${{github.repository}}
   prefix:  # id of input
     description: 'prefix to apply to releases, default is "v"'
     required: true
