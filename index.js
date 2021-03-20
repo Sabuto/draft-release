@@ -6,7 +6,7 @@ const github = require('@actions/github');
 // most @actions toolkit packages have async methods
 async function run() {
   try {
-    const payload = github.context.payload;
+    const commits = github.context.payload.commits;
     // set the success output to false to begin with
     core.setOutput('success', false);
     const prefix = core.getInput('prefix');
