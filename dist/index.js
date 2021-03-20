@@ -36,7 +36,11 @@ async function run() {
       }
     });
 
-    const {tag_name: tag} = Object.values(releases)[0];
+    const withTags = releases.filter(obj => {
+      return obj.draft == false;
+    });
+
+    core.info(JSON.stringify(withTags));
 
     if (Object.keys(draft).length !== 0) {
       core.info(Object.keys(draft).length);
