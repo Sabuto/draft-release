@@ -36,7 +36,7 @@ async function run() {
 
     const lastRelease = withTags[Object.keys(withTags)[0]];
 
-    core.info(lastRelease);
+    core.info(JSON.stringify(lastRelease, null, 3));
 
     let lastReleaseTag = lastRelease.tag_name;
 
