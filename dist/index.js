@@ -66,11 +66,19 @@ async function run() {
       commits.forEach(obj => {
         body += `* ${obj.message} @${obj.committer.username}`
       })
-      core.info(body);
+      await octokit.repos.updateRelease({
+        owner: owner,
+        repo: repo,
+        body: body
+      });
     } else {
       core.info("No Draft found.... Creating new draft.");
       core.info(`latest tag: ${lastReleaseTag}`);
       core.info(`Creating draft release with the tag ${major}.${minor}.${patch}`);
+      let body;
+      commits.forEach(obj => {
+        body += `* ${obj.message} @${obj.committer.username}`
+      });
       await octokit.repos.createRelease({
         owner: owner,
         repo: repo,
