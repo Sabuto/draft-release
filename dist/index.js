@@ -68,7 +68,7 @@ async function run() {
       const response = await octokit.repos.updateRelease({
         owner: owner,
         repo: repo,
-        release_id: draftObj.id,
+        release_id: draft[Object.keys(draft)[0]].id,
         body: body
       });
 
