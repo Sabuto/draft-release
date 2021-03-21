@@ -46,7 +46,6 @@ async function run() {
 
     if (Object.keys(draft).length !== 0) {
       core.info("Draft found! lets add to the content");
-      core.info(JSON.stringify(draft, null, 3));
       const draftObj = await octokit.repos.getRelease({
         owner: owner,
         repo: repo,
@@ -62,6 +61,7 @@ async function run() {
       await octokit.repos.updateRelease({
         owner: owner,
         repo: repo,
+        release_id: draftObj.id,
         body: body
       });
     } else {
@@ -77,7 +77,7 @@ async function run() {
         repo: repo,
         tag_name: `${prefix}${major}.${minor}.${patch}`,
         name: `Auto-Drafter: ${prefix}${major}.${minor}.${patch}`,
-        body: payload.message,
+        body: body,
         draft: true
       });
       core.info("Successfully created the draft.");
