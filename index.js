@@ -58,12 +58,23 @@ async function run() {
       commits.forEach(obj => {
         body += `* ${obj.message} @${obj.committer.username}`
       })
-      await octokit.repos.updateRelease({
+      const response = await octokit.repos.updateRelease({
         owner: owner,
         repo: repo,
         release_id: draftObj.id,
         body: body
       });
+
+      const {
+        data: {id: releaseId, html_url: htmlUrl, upload_url: uploadUrl}
+      } = response;
+
+      // add outputs
+      core.setOutput('id', releaseId);
+      core.setOutput('html_url', htmlUrl);
+      core.setOutput('upload_url', uploadUrl);
+
+      core.info("Successfully updated the draft.");
     } else {
       core.info("No Draft found.... Creating new draft.");
       core.info(`latest tag: ${lastReleaseTag}`);
@@ -72,7 +83,7 @@ async function run() {
       commits.forEach(obj => {
         body += `* ${obj.message} @${obj.committer.username}`
       });
-      await octokit.repos.createRelease({
+      const response = await octokit.repos.createRelease({
         owner: owner,
         repo: repo,
         tag_name: `${prefix}${major}.${minor}.${patch}`,
@@ -80,11 +91,17 @@ async function run() {
         body: body,
         draft: true
       });
+      const {
+        data: {id: releaseId, html_url: htmlUrl, upload_url: uploadUrl}
+      } = response;
+
+      // add outputs
+      core.setOutput('id', releaseId);
+      core.setOutput('html_url', htmlUrl);
+      core.setOutput('upload_url', uploadUrl);
+
       core.info("Successfully created the draft.");
     }
-
-    // Get the prefix from the inputs
-    //const prefix = core.getInput('prefix', {required: true});
   } catch (error) {
     core.setFailed(error.message);
   }

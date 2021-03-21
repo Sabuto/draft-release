@@ -15,6 +15,12 @@ inputs:
 outputs:
   success: # output will be available to future steps
     description: 'boolean as to weather draft was successfull or not'
+  id:
+    description: 'Id of the created or updated draft'
+  html_url:
+    description: 'The html url of the created or updated draft'
+  upload_url:
+    description: 'The upload url of the created or updated draft'
 runs:
   using: 'node12'
   main: 'dist/index.js'
